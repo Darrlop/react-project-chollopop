@@ -1,12 +1,14 @@
+import "./Footer.css";
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div>
         <p>
-          2024 - <strong>Chollopop, tu web molona de compraventa</strong>.
+          2024 - <strong>Chollopop ®</strong>
         </p>
       </div>
-      <div>
+      {/* <div>
         <a href="https://twitter.com/" target="_blank" title="Twitter/X">
           <span className="footer__icon">
             <i className="fi fi-brands-twitter"></i>
@@ -20,7 +22,7 @@ export default function Footer() {
           </span>
           Instagram
         </a>
-      </div>
+      </div> */}
     </footer>
   );
 }

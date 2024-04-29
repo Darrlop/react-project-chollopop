@@ -1,0 +1,21 @@
+.footer {
+  margin-top: 3rem;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 1rem;
+
+  background: var(--fondo-header-footer);
+  background: radial-gradient(
+    circle,
+    /* rgba(199, 247, 124, 1) 0%, */ rgba(159, 231, 87, 1) 0%,
+    rgba(114, 222, 70, 1) 59%,
+    rgba(92, 201, 47, 1) 99%
+  );
+  border-radius: 20px;
+}
+
+.footer__icon {
+  transform: scale(2);
+  font-size: 2rem;
+  margin: 0px 20px;
+}
