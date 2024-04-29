@@ -1,10 +1,11 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import Navigate from "./components/layout/Navigate";
+import ArticlesPage from "./pages/articles/ArticlesPage";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -13,6 +14,7 @@ function App() {
     <div>
       <Header />
       <Navigate />
+      <ArticlesPage />
       <Footer />
     </div>
 
