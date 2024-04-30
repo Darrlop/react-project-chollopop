@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "./service";
 
-function ArticlesPage() {
+import { setAuthorizationHeader } from "../../api/client";
+
+function ArticlesPage({ isLogged }) {
+  setAuthorizationHeader(isLogged);
+
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles().then((articles) => setArticles(articles));

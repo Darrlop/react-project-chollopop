@@ -23,7 +23,7 @@ const Button = styled.button`
   outline-style: none;
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   padding: 0 30px;
-  margin: 0 10px;
+  margin: 5px 10px;
   pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
   text-decoration: none;
   transition: background-color 0.3s;

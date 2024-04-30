@@ -1,3 +1,4 @@
+import { useHref } from "react-router-dom";
 import Button from "../shared/Button";
 
 export default function () {
@@ -6,13 +7,13 @@ export default function () {
       {/* <nav className="header-nav">Aquí van los botones</nav> */}
       <nav
         style={{
-          border: "1px solid black ",
+          border: "1px solid green ",
           margin: "1rem",
+          padding: "5px",
           borderRadius: "10px",
         }}
       >
-        <Button>Botoneando</Button>
-        <Button>Pulsando</Button>
+        <Button>Acceso</Button>
       </nav>
     </div>
   );

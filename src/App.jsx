@@ -6,15 +6,28 @@ import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import Navigate from "./components/layout/Navigate";
 import ArticlesPage from "./pages/articles/ArticlesPage";
+import LoginPage from "./pages/auth/LoginPage";
+import storage from "./utils/storage";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  function testLogged() {
+    return storage.get("token");
+  }
+  const [isLogged, setIsLogged] = useState(testLogged());
+
+  const handleLogin = () => setIsLogged(true);
+
+  console.log(storage.get("token"));
 
   return (
     <div>
       <Header />
       <Navigate />
-      <ArticlesPage />
+      {isLogged ? (
+        <ArticlesPage isLogged={isLogged} />
+      ) : (
+        <LoginPage onLogin={handleLogin} />
+      )}
       <Footer />
     </div>
 
