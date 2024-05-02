@@ -1,7 +1,7 @@
 import { useHref } from "react-router-dom";
 import Button from "../shared/Button";
 
-export default function () {
+export default function Nav() {
   return (
     <div>
       {/* <nav className="header-nav">Aquí van los botones</nav> */}
@@ -14,6 +14,7 @@ export default function () {
         }}
       >
         <Button>Acceso</Button>
+        <Button>Salir</Button>
       </nav>
     </div>
   );
