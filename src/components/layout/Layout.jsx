@@ -4,16 +4,13 @@ import Header from "./Header";
 import Nav from "./Nav";
 //import './Layout.css';
 
-export default function Layout({ title, children }) {
-  // export default function Layout({ title }) {
+export default function Layout() {
   return (
     <div className="layout">
       <Header />
       <Nav />
       <main>
-        <h2>{title}</h2>
-        {children}
-        {/* <Outlet /> */}
+        <Outlet />
       </main>
       <Footer />
     </div>

@@ -2,22 +2,15 @@ import { useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
-import Nav from "./components/layout/Nav";
 import ArticlesPage from "./pages/articles/ArticlesPage";
 import LoginPage from "./pages/auth/LoginPage";
 import storage from "./utils/storage";
 import Layout from "./components/layout/Layout";
+import RequireAuth from "./pages/auth/components/RequireAuth";
 
 function App() {
-  function testLogged() {
-    return storage.get("token");
-  }
-  const [isLogged, setIsLogged] = useState(testLogged());
-  const handleLogin = () => setIsLogged(true);
   console.log(storage.get("token"));
 
   return (
@@ -33,7 +26,14 @@ function App() {
       /> */}
       <Route path="/" element={<Layout />}>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/articles" element={<ArticlesPage />} />
+        <Route
+          path="/articles"
+          element={
+            <RequireAuth>
+              <ArticlesPage />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/articles/:articleId"
           element={<div>Detalle de Artículo</div>}
@@ -43,17 +43,6 @@ function App() {
         <Route path="*" element={<Navigate to="/404" />} />
       </Route>
     </Routes>
-
-    // <div>
-    //   <Header />
-    //   <Nav />
-    //   {isLogged ? (
-    //     <ArticlesPage isLogged={isLogged} />
-    //   ) : (
-    //     <LoginPage onLogin={handleLogin} />
-    //   )}
-    //   <Footer />
-    // </div>
   );
 }
 

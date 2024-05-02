@@ -2,18 +2,23 @@ import Button from "../../components/shared/Button";
 import { useState } from "react";
 import "./LoginPage.css";
 import { login } from "./service";
+import { useAuth } from "./context";
+import { useNavigate, useLocation } from "react-router-dom";
 
-export default function LoginPage({ onLogin }) {
+export default function LoginPage({}) {
   // const [userMail, setUserMail] = useState("");
   // const [password, setPassword] = useState("");
   // const [checked, setChecked] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { onLogin } = useAuth();
 
   const [formValues, setFormValues] = useState({
     userMail: "",
     password: "",
     check: false,
   });
-
   const { userMail, password, check } = formValues;
 
   const handleChange = (event) => {
@@ -30,11 +35,10 @@ export default function LoginPage({ onLogin }) {
     event.preventDefault();
     console.log(formValues);
     console.log("Hemos logeado");
-    const response = await login(formValues);
-    console.log("RESPONSE---->");
-    console.log(response);
-
+    await login(formValues);
     onLogin();
+    //navigate(location.state?.from || "/articles", { replace: true });
+    navigate("/articles", { replace: true });
   };
 
   return (

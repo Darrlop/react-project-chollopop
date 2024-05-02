@@ -7,7 +7,6 @@ export const login = (formValues) => {
     password: formValues.password,
   };
   const checked = formValues.check;
-  console.log(credentials);
 
   return client.post("/api/auth/login", credentials).then(({ accessToken }) => {
     setAuthorizationHeader(accessToken);
