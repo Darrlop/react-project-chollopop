@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { getArticles } from "./service";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { setAuthorizationHeader } from "../../api/client";
+import styled from "styled-components";
 
 function ArticlesPage({}) {
-  // setAuthorizationHeader(isLogged);
-
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles().then((articles) => setArticles(articles));
@@ -17,20 +15,30 @@ function ArticlesPage({}) {
 
   return (
     <>
-      <ul style={{ listStyle: "none" }}>
+      <ul style={{ listStyle: "none", padding: 0 }}>
         {articles.map(({ id, name, price, sale, tags, photo }) => (
-          <li key={id}>
-            <hr></hr>
-            <p>Artículo: {name}</p>
-            <p>Precio: {price}</p>
+          <ItemList key={id}>
+            <p>
+              <strong>Artículo: {name}</strong>
+            </p>
+            <p>Precio: {price} €</p>
             <p>Estado: {price ? "En venta" : "Se compra"}</p>
             <p>Tags: {tags}</p>
-          </li>
+          </ItemList>
         ))}
       </ul>
-      <hr></hr>
     </>
   );
 }
+
+//convierto el elemento <li> en un styled-component
+const ItemList = styled.li`
+  list-style: none;
+  padding-left: 30%;
+  margin-top: 15px;
+  text-align: left;
+  border: 1px solid green;
+  border-radius: 10px;
+`;
 
 export default ArticlesPage;

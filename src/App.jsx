@@ -2,7 +2,7 @@ import { useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
 
 import ArticlesPage from "./pages/articles/ArticlesPage";
 import LoginPage from "./pages/auth/LoginPage";
@@ -39,7 +39,15 @@ function App() {
           element={<div>Detalle de Artículo</div>}
         />
         <Route path="/articles/new" element={<div>Nuevo artículo</div>} />
-        <Route path="/404" element={"<div>Http 404 | not found...</div>"} />
+        <Route
+          path="/404"
+          element={
+            <div>
+              Http 404 | not found...<br></br>
+              <Link to="/articles">Volver</Link>
+            </div>
+          }
+        />
         <Route path="*" element={<Navigate to="/404" />} />
       </Route>
     </Routes>
