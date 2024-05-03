@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "./service";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
+import "./ArticlesPage.css";
 
 function ArticlesPage({}) {
   const [articles, setArticles] = useState([]);
@@ -17,14 +18,16 @@ function ArticlesPage({}) {
     <>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {articles.map(({ id, name, price, sale, tags, photo }) => (
-          <ItemList key={id}>
-            <p>
-              <strong>Artículo: {name}</strong>
-            </p>
-            <p>Precio: {price} €</p>
-            <p>Estado: {price ? "En venta" : "Se compra"}</p>
-            <p>Tags: {tags}</p>
-          </ItemList>
+          <NavLink className="navlink" to={`/articles/${id}`} key={id}>
+            <ItemList key={id}>
+              <p>
+                <strong>Artículo: {name}</strong>
+              </p>
+              <p>Precio: {price} €</p>
+              <p>Estado: {price ? "En venta" : "Se compra"}</p>
+              <p>Tags: {tags}</p>
+            </ItemList>
+          </NavLink>
         ))}
       </ul>
     </>

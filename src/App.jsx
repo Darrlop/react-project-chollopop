@@ -15,16 +15,16 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route
-        index
-        element={
-          <>
-            <h2>Bienvenido a Chollopop, la tienda online</h2>
-            <p>Accede con tu usuario para entrar a la sección de anuncios</p>
-          </>
-        }
-      /> */}
       <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <>
+              <h2>Bienvenido a Chollopop, la tienda online</h2>
+              <p>Accede con tu usuario para entrar a la sección de anuncios</p>
+            </>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/articles"

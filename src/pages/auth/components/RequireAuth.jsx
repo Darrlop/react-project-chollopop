@@ -8,6 +8,6 @@ export default function RequireAuth({ children }) {
   return isLogged ? (
     children
   ) : (
-    <Navigate to="/login" state={{ from: location.pathname }} replace />
+    <Navigate to="/" state={{ from: location.pathname }} replace />
   );
 }
