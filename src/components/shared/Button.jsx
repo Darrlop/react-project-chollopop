@@ -32,6 +32,11 @@ const Button = styled.button`
     border-color: ${hoverColor};
     color: ${hoverColor};
   }
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 export default Button;

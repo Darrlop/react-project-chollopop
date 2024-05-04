@@ -9,6 +9,8 @@ import LoginPage from "./pages/auth/LoginPage";
 import storage from "./utils/storage";
 import Layout from "./components/layout/Layout";
 import RequireAuth from "./pages/auth/components/RequireAuth";
+import ArticlePage from "./pages/articles/ArticlePage";
+import NewArticlePage from "./pages/articles/NewArticlePage";
 
 function App() {
   console.log(storage.get("token"));
@@ -36,9 +38,20 @@ function App() {
         />
         <Route
           path="/articles/:articleId"
-          element={<div>Detalle de Artículo</div>}
+          element={
+            <RequireAuth>
+              <ArticlePage />
+            </RequireAuth>
+          }
         />
-        <Route path="/articles/new" element={<div>Nuevo artículo</div>} />
+        <Route
+          path="/articles/new"
+          element={
+            <RequireAuth>
+              <NewArticlePage />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/404"
           element={

@@ -15,22 +15,20 @@ function ArticlesPage({}) {
   console.log(articles);
 
   return (
-    <>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {articles.map(({ id, name, price, sale, tags, photo }) => (
-          <NavLink className="navlink" to={`/articles/${id}`} key={id}>
-            <ItemList key={id}>
-              <p>
-                <strong>Artículo: {name}</strong>
-              </p>
-              <p>Precio: {price} €</p>
-              <p>Estado: {price ? "En venta" : "Se compra"}</p>
-              <p>Tags: {tags}</p>
-            </ItemList>
-          </NavLink>
-        ))}
-      </ul>
-    </>
+    <ul style={{ listStyle: "none", padding: 0 }}>
+      {articles.map(({ id, name, price, sale, tags, photo }) => (
+        <NavLink className="navlink" to={`/articles/${id}`} key={id}>
+          <ItemList key={id}>
+            <p>
+              <strong>Artículo: {name}</strong>
+            </p>
+            <p>Precio: {price} €</p>
+            <p>Estado: {price ? "En venta" : "Se compra"}</p>
+            <p>Tags: {tags}</p>
+          </ItemList>
+        </NavLink>
+      ))}
+    </ul>
   );
 }
 

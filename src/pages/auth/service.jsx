@@ -1,4 +1,8 @@
-import { client, setAuthorizationHeader } from "../../api/client";
+import {
+  client,
+  deleteAuthorizationHeader,
+  setAuthorizationHeader,
+} from "../../api/client";
 import storage from "../../utils/storage";
 
 export const login = (formValues) => {
@@ -14,8 +18,11 @@ export const login = (formValues) => {
       storage.set("token", accessToken);
     }
   });
+};
 
-  // return client.post("/api/auth/login", credentials).then(({ accessToken }) => {
-  //   setAuthorizationHeader(accessToken);
-  // });
+export const logout = () => {
+  return Promise.resolve().then(() => {
+    deleteAuthorizationHeader();
+    storage.remove("token");
+  });
 };
