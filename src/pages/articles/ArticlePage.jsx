@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { getArticle } from "./service";
-import { NavLink } from "react-router-dom";
 import "./ArticlePage.css";
 
 export default function ArticlePage() {
@@ -14,6 +13,7 @@ export default function ArticlePage() {
       setArticle(item);
     };
     fetchArticle();
+    //getArticle(params.articleId).then((article) => setArticle(article));
   }, []);
 
   return (
@@ -26,11 +26,21 @@ export default function ArticlePage() {
         <b>Estado:</b> {article.sale ? "En venta" : "Se compra"}
       </p>
       <p>
-        <b>tags:</b> {article.tags}
+        <b>tags:</b>{" "}
+        {/* ternario doble Para evitar problemas con length join, etc y los null*/}
+        {article.tags !== undefined
+          ? article.tags.length > 1
+            ? article.tags.join(", ").slice(0, -1)
+            : article.tags
+          : ""}
       </p>
       <div>
         <img
-          src={article.photo}
+          src={
+            article.photo === null
+              ? "https://res.cloudinary.com/dyyhithd8/image/upload/v1710875978/no-photo_nt2ttr.jpg"
+              : article.photo
+          }
           className="photo-detail"
           alt="Imagen del artículo"
         />

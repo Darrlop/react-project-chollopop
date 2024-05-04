@@ -3,7 +3,6 @@ import { useState } from "react";
 import "./NewArticlePage.css";
 import { useAuth } from "../auth/context";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { postArticle } from "./service";
 
 export default function NewArticlePage({}) {
   const location = useLocation();
@@ -12,19 +11,18 @@ export default function NewArticlePage({}) {
 
   const [formValues, setFormValues] = useState({
     name: "",
-    sale: "venta",
+    sale: "",
     price: 0.0,
-    tags: ["lifestyle"],
-    photo: null,
+    tags: "",
   });
-  let { name, sale, price, tags, photo } = formValues;
+  let { name, sale, price, tags } = formValues;
 
   const handleChange = (event) => {
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
       [event.target.name]:
-        event.target.type === "file"
-          ? event.target.files[0]
+        event.target.type === "checkbox"
+          ? event.target.checked
           : event.target.value,
     }));
   };
@@ -34,26 +32,23 @@ export default function NewArticlePage({}) {
       name: "",
       sale: "venta",
       price: 0.0,
-      tags: [],
-      photo: null,
+      tags: "",
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formValues);
-    await postArticle(formValues);
+    //await login(formValues);
     //onLogin();
-    navigate("/articles", { replace: true });
+    ////navigate(location.state?.from || "/articles", { replace: true });
+    //navigate("/articles", { replace: true });
   };
 
   return (
     <div>
       <h2>Nuevo Anuncio</h2>
       <form className="frame" onSubmit={handleSubmit}>
-        <p>
-          (*)<i> Campos obligatorios</i>
-        </p>
         <label htmlFor="name">Artículo </label>
         <input
           required
@@ -62,15 +57,13 @@ export default function NewArticlePage({}) {
           value={name}
           onChange={handleChange}
         />
-        *<br></br>
+        <br></br>
         <label>Venta/compra </label>
-        <select name="sale" onChange={handleChange} value={sale} required>
-          <option value="venta" selected>
-            Venta
-          </option>
+        <select onChange={handleChange} value={sale} required>
+          <option value="venta">Venta</option>
           <option value="compra">Compra</option>
         </select>
-        *<br></br>
+        <br></br>
         <label htmlFor="price">Precio </label>
         <input
           required
@@ -79,26 +72,15 @@ export default function NewArticlePage({}) {
           value={price}
           onChange={handleChange}
         />
-        *<br></br>
+        <br></br>
         <label>Tags (min. 1) </label>
-        <select name="tags" onChange={handleChange} value={tags} required>
+        <select id="selectMultiple" onChange={handleChange} required>
           <option value="lifestyle">lifestyle</option>
           <option value="mobile">mobile</option>
           <option value="motor">motor</option>
           <option value="work">work</option>
         </select>
-        *<br></br>
-        <hr></hr>
-        <label htmlFor="image">Selecciona una foto:</label>
         <br></br>
-        <input
-          type="file"
-          name="photo"
-          accept="image/*"
-          onChange={handleChange}
-        />
-        <br></br>
-        <hr></hr>
         <Button onClick={resetAll}>Borrar</Button>
         <Button type="submit">Enviar</Button>
       </form>
