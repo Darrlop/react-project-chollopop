@@ -10,9 +10,10 @@ Aunque he logrado hacer modal para las ventanas de error, no he tenido tiempo pa
 Sí que subiré fuera de plazo el README. Aunque eso no tiene efecto en la práctica directamente, sí que entiendo que es un aspecto importante pero espero que no te importe que sea subido fuera de plazo.
 
 Un saludo.
---
+
 David Arrarás
 
+----
 
 
 # Chollo pop
