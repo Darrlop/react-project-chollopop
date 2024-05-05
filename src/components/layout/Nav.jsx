@@ -28,21 +28,20 @@ export default function Nav() {
             <Button>Publicar</Button>
           </Link>
         )}
-        <Link to="/articles">
-          <Button>Anuncios</Button>
-        </Link>
-        {rutaActual === "/search" ? (
+        {isLogged ? (
           <Link to="/articles">
-            <Button>Fin Busqueda</Button>
+            <Button>Anuncios</Button>
           </Link>
-        ) : isLogged ? (
+        ) : (
+          <Button disabled>Anuncios</Button>
+        )}
+        {isLogged ? (
           <Link Link to="/search">
             <Button>Busqueda</Button>
           </Link>
         ) : (
           <Button disabled>Busqueda</Button>
         )}
-
         <LogoutButton>Salir</LogoutButton>
       </nav>
     </div>

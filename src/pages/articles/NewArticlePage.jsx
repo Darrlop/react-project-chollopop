@@ -4,6 +4,10 @@ import "./NewArticlePage.css";
 import { useAuth } from "../auth/context";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { postArticle } from "./service";
+import { useModal } from "../../components/modals/useModal";
+import Modal from "../../components/modals/Modal";
+
+const { isOpen, openModal, closeModal } = useModal(false);
 
 export default function NewArticlePage({}) {
   const location = useLocation();
@@ -114,6 +118,11 @@ export default function NewArticlePage({}) {
         <Button onClick={resetAll}>Borrar</Button>
         <Button type="submit">Enviar</Button>
       </form>
+      <Modal
+        messageModal="fucking Prueba"
+        isOpen={isOpen}
+        closeModal={closeModal}
+      />
     </div>
   );
 }
