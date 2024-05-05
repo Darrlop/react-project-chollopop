@@ -1,4 +1,3 @@
-import Button from "../shared/Button";
 import "./Modal.css";
 
 const Modal = ({ isOpen, closeModal, children }) => {

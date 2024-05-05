@@ -4,15 +4,13 @@ import "./NewArticlePage.css";
 import { useAuth } from "../auth/context";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { postArticle } from "./service";
-import { useModal } from "../../components/modals/useModal";
-import Modal from "../../components/modals/Modal";
-
-const { isOpen, openModal, closeModal } = useModal(false);
+import { useErrorModal } from "../../components/modals/contextModal";
 
 export default function NewArticlePage({}) {
   const location = useLocation();
   const navigate = useNavigate();
   const { onLogin } = useAuth();
+  const { showErrorModal } = useErrorModal();
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -53,7 +51,8 @@ export default function NewArticlePage({}) {
       await postArticle(formValues);
       navigate("/articles", { replace: true });
     } catch (error) {
-      alert("Error al enviar el artículo: " + error.message);
+      //alert("Error al enviar el artículo: " + error.message);
+      showErrorModal("Error al enviar el artículo: " + error.message);
     }
   };
 
@@ -118,11 +117,6 @@ export default function NewArticlePage({}) {
         <Button onClick={resetAll}>Borrar</Button>
         <Button type="submit">Enviar</Button>
       </form>
-      <Modal
-        messageModal="fucking Prueba"
-        isOpen={isOpen}
-        closeModal={closeModal}
-      />
     </div>
   );
 }

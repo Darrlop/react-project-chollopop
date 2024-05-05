@@ -1,21 +1,18 @@
 import Button from "../../components/shared/Button";
-import { useState } from "react";
 import "./LoginPage.css";
 import { login } from "./service";
 import { useAuth } from "./context";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useModal } from "../../components/modals/useModal";
-import Modal from "../../components/modals/Modal";
+import { useState } from "react";
+import { useErrorModal } from "../../components/modals/contextModal";
 
 export default function LoginPage({}) {
-  // const [userMail, setUserMail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [checked, setChecked] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
   const { onLogin } = useAuth();
-  const { isOpen, openModal, closeModal } = useModal(true);
+
+  //const { errorModal, showErrorModal, hideErrorModal } = useErrorModal();
+  const { showErrorModal } = useErrorModal();
 
   const [formValues, setFormValues] = useState({
     userMail: "",
@@ -43,7 +40,8 @@ export default function LoginPage({}) {
       onLogin();
       navigate("/articles", { replace: true });
     } catch (error) {
-      alert("Error al iniciar sesión: " + error.message);
+      //alert("Error al iniciar sesión: " + error.message);
+      showErrorModal("Error al iniciar sesión :" + error.message);
     }
   };
 
