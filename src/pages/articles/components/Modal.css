@@ -1,0 +1,43 @@
+.modal {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(0, 0, 0, 0.75);
+  display: none;
+  justify-items: center;
+  align-items: center;
+}
+
+.modal.is-open {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.modal-container {
+  position: relative;
+  padding: 3rem 1rem 1rem 1rem;
+  border-radius: 10px;
+  background-color: rgb(229, 83, 90);
+  min-width: 320px;
+  max-width: 480px;
+  min-height: 200px;
+  max-height: 600px;
+  overflow-y: auto; /*permite hacer scroll vertical */
+}
+
+.modal-close {
+  /* un elemento con absolute se posiciona, o bien según el padre que tenga un relative (este caso), o bien según el html) */
+  position: absolute;
+  text-align: center;
+  width: 30px;
+  top: 10px;
+  right: 10px;
+}
+.modal-close:hover {
+  cursor: pointer;
+}

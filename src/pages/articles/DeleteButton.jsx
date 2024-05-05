@@ -1,6 +1,8 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { deleteArticle } from "./service";
 import Button from "../../components/shared/Button";
+import "./components/Modal.css";
+import { ConfirmModal } from "./components/ConfirmModal";
 
 export default function deleteButton({ articleId }) {
   const navigate = useNavigate();
