@@ -30,7 +30,7 @@ export default function ArticlePage() {
         {/* ternario doble Para evitar problemas con length join, etc y los null*/}
         {article.tags !== undefined
           ? article.tags.length > 1
-            ? article.tags.join(", ").slice(0, -1)
+            ? article.tags.join(", ")
             : article.tags
           : ""}
       </p>

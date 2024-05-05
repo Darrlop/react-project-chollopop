@@ -2,10 +2,12 @@ import { useHref } from "react-router-dom";
 import Button from "../shared/Button";
 import LogoutButton from "../../pages/auth/components/LogoutButton";
 import { useAuth } from "../../pages/auth/context";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Route, useLocation } from "react-router-dom";
 
 export default function Nav() {
   const { isLogged } = useAuth();
+  const location = useLocation();
+  const rutaActual = location.pathname;
 
   return (
     <div>
@@ -26,8 +28,15 @@ export default function Nav() {
             <Button>Anunciar</Button>
           </Link>
         )}
-        <Button>Busqueda</Button>
-        {/* Usar directamente un componente button para logout */}
+        {rutaActual === "/search" ? (
+          <Link to="/articles">
+            <Button>Fin Busqueda</Button>
+          </Link>
+        ) : (
+          <Link Link to="/search">
+            <Button>Busqueda</Button>
+          </Link>
+        )}
         <LogoutButton>Salir</LogoutButton>
       </nav>
     </div>

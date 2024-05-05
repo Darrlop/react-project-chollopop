@@ -24,8 +24,7 @@ function ArticlesPage({}) {
             </p>
             <p>Precio: {price} €</p>
             <p>Estado: {sale ? "En venta" : "Se compra"}</p>
-            {/* <p>Tags: {tags.join(", ").slice(0, -1)}</p> */}
-            <p>Tags: {tags.length > 1 ? tags.join(", ").slice(0, -1) : tags}</p>
+            <p>Tags: {tags.length > 1 ? tags.join(", ") : tags}</p>
           </ItemList>
         </NavLink>
       ))}

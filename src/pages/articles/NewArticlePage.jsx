@@ -19,17 +19,20 @@ export default function NewArticlePage({}) {
   });
   let { name, sale, price, tags, photo } = formValues;
 
+  // Se diferencia elemento file, select o input según el tipo o el name, según venga mejor
   const handleChange = (event) => {
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
       [event.target.name]:
         event.target.type === "file"
           ? event.target.files[0]
+          : event.target.name === "tags"
+          ? Array.from(event.target.selectedOptions, (option) => option.value)
           : event.target.value,
     }));
   };
 
-  const resetAll = (event) => {
+  const resetAll = () => {
     setFormValues({
       name: "",
       sale: "venta",
@@ -43,8 +46,7 @@ export default function NewArticlePage({}) {
     event.preventDefault();
     console.log(formValues);
     await postArticle(formValues);
-    //onLogin();
-    navigate("/articles", { replace: true });
+    //navigate("/articles", { replace: true });
   };
 
   return (
@@ -81,7 +83,13 @@ export default function NewArticlePage({}) {
         />
         *<br></br>
         <label>Tags (min. 1) </label>
-        <select name="tags" onChange={handleChange} value={tags} required>
+        <select
+          multiple
+          name="tags"
+          onChange={handleChange}
+          //value={tags}
+          required
+        >
           <option value="lifestyle">lifestyle</option>
           <option value="mobile">mobile</option>
           <option value="motor">motor</option>

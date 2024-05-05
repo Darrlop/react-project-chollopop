@@ -3,14 +3,14 @@ import { useState } from "react";
 // import viteLogo from "/vite.svg";
 import "./App.css";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
-
+import storage from "./utils/storage";
 import ArticlesPage from "./pages/articles/ArticlesPage";
 import LoginPage from "./pages/auth/LoginPage";
-import storage from "./utils/storage";
 import Layout from "./components/layout/Layout";
 import RequireAuth from "./pages/auth/components/RequireAuth";
 import ArticlePage from "./pages/articles/ArticlePage";
 import NewArticlePage from "./pages/articles/NewArticlePage";
+import SearchPage from "./pages/articles/SearchPage";
 
 function App() {
   console.log(storage.get("token"));
@@ -21,10 +21,16 @@ function App() {
         <Route
           path="/"
           element={
-            <>
-              <h2>Bienvenido a Chollopop, la tienda online</h2>
-              <p>Accede con tu usuario para entrar a la sección de anuncios</p>
-            </>
+            storage.get("token") ? (
+              <Navigate to="/articles" />
+            ) : (
+              <>
+                <h2>Bienvenido a Chollopop, la tienda online</h2>
+                <p>
+                  Accede con tu usuario para entrar a la sección de anuncios
+                </p>
+              </>
+            )
           }
         />
         <Route path="/login" element={<LoginPage />} />
@@ -49,6 +55,14 @@ function App() {
           element={
             <RequireAuth>
               <NewArticlePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <RequireAuth>
+              <SearchPage />
             </RequireAuth>
           }
         />

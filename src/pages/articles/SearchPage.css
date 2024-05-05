@@ -1,0 +1,18 @@
+.navlink {
+  /* Estilo por defecto para NavLink */
+  color: inherit; /* Elimina el color azul por defecto */
+  text-decoration: none; /* Elimina el subrayado */
+  transition: background-color 0.3s ease; /* Para el efecto hover */
+}
+
+.navlink:hover {
+  /* Estilo hover para NavLink */
+  color: black;
+  background-color: rgb(193, 234, 193); /* Azul claro de fondo */
+}
+
+.navlink :hover {
+  /* Estilo hover para NavLink */
+  color: black;
+  background-color: rgb(193, 234, 193); /* Azul claro de fondo */
+}
