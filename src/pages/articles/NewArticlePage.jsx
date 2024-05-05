@@ -118,7 +118,6 @@ export default function NewArticlePage({}) {
               {tag}
             </option>
           ))}
-
           {/* <option value="lifestyle">lifestyle</option>
           <option value="mobile">mobile</option>
           <option value="motor">motor</option>
