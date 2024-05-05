@@ -23,8 +23,6 @@ function ArticlesPage({}) {
       });
   }, []);
 
-  console.log(articles);
-
   return (
     <ul style={{ listStyle: "none", padding: 0 }}>
       {articles.map(({ id, name, price, sale, tags, photo }) => (

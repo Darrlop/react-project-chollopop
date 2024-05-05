@@ -1,9 +1,9 @@
 import Button from "../../components/shared/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./NewArticlePage.css";
 import { useAuth } from "../auth/context";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { postArticle } from "./service";
+import { getTags, postArticle } from "./service";
 import { useErrorModal } from "../../components/modals/contextModal";
 
 export default function NewArticlePage({}) {
@@ -20,6 +20,22 @@ export default function NewArticlePage({}) {
     photo: null,
   });
   let { name, sale, price, tags, photo } = formValues;
+
+  const [listTags, setListTags] = useState([]);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const arrayTags = await getTags();
+        setListTags(arrayTags);
+        console.log(listTags);
+      } catch (error) {
+        alert("Error al obtener los tags: " + error.message);
+        navigate("/articles", { replace: true });
+      }
+    };
+    fetchTags();
+  }, []);
 
   // Se diferencia elemento file, select o input según el tipo o el name, según venga mejor
   const handleChange = (event) => {
@@ -97,10 +113,15 @@ export default function NewArticlePage({}) {
           //value={tags}
           required
         >
-          <option value="lifestyle">lifestyle</option>
+          {listTags.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+          {/* <option value="lifestyle">lifestyle</option>
           <option value="mobile">mobile</option>
           <option value="motor">motor</option>
-          <option value="work">work</option>
+          <option value="work">work</option> */}
         </select>
         *<br></br>
         <hr></hr>
