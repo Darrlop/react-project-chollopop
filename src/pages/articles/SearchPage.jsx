@@ -22,13 +22,16 @@ function SearchPage({}) {
   const handleNameSearch = (event) => {
     event.preventDefault();
     getArticles().then((articles) => {
+      console.log(articles);
       const filteredArticles = articles.filter((article) =>
         //Si queremos que el nombre del artículo contenga las palabras de búsqueda:
         //article.name.includes(nameOfSearch)
         //Si el artículo empieza por las palabras de búsqueda:
         article.name.toLowerCase().startsWith(nameOfSearch.toLowerCase())
       );
-      console.log("Artículos filtrados:", filteredArticles);
+      if (filteredArticles.length === 0) {
+        navigate("/204");
+      }
       setArticles(filteredArticles);
     });
   };
@@ -43,7 +46,9 @@ function SearchPage({}) {
           //Filtro para coincidencia estricta de tags:
           JSON.stringify(article.tags) === JSON.stringify(tagsOfSearch)
       );
-      console.log("Artículos filtrados:", filteredArticles);
+      if (filteredArticles.length === 0) {
+        navigate("/204");
+      }
       setArticles(filteredArticles);
     });
   };

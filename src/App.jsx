@@ -92,7 +92,7 @@ function App() {
           element={
             <div>
               No hay ningún contenido para mostrar<br></br>
-              <Link to="/">Volver </Link>//
+              <Link to="/">Home </Link>//
               <Link to="/articles/new"> Publicar</Link>
             </div>
           }

@@ -28,7 +28,9 @@ export default function Nav() {
             <Button>Publicar</Button>
           </Link>
         )}
-
+        <Link to="/articles">
+          <Button>Anuncios</Button>
+        </Link>
         {rutaActual === "/search" ? (
           <Link to="/articles">
             <Button>Fin Busqueda</Button>
