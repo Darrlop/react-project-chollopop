@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticles } from "./service";
+import { getArticles, getTags } from "./service";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/shared/Button";
 import styled from "styled-components";
@@ -10,6 +10,22 @@ function SearchPage({}) {
   const [nameOfSearch, setNameOfSearch] = useState("");
   const [tagsOfSearch, setTagsOfSearch] = useState([]);
   const navigate = useNavigate();
+
+  const [listTags, setListTags] = useState([]);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const arrayTags = await getTags();
+        setListTags(arrayTags);
+        console.log(listTags);
+      } catch (error) {
+        alert("Error al obtener los tags: " + error.message);
+        navigate("/articles", { replace: true });
+      }
+    };
+    fetchTags();
+  }, []);
 
   const handleNameSearch = (event) => {
     event.preventDefault();
@@ -86,10 +102,15 @@ function SearchPage({}) {
           <label htmlFor="tagsOfSearch">Selecciona tag(s) a buscar </label>
           <br></br>
           <select multiple name="tags" onChange={handleTagsChange} required>
-            <option value="lifestyle">lifestyle</option>
+            {listTags.map((tag) => (
+              <option key={tag} value={tag}>
+                {tag}
+              </option>
+            ))}
+            {/* <option value="lifestyle">lifestyle</option>
             <option value="mobile">mobile</option>
             <option value="motor">motor</option>
-            <option value="work">work</option>
+            <option value="work">work</option> */}
           </select>
           <br></br>
           <button type="button" onClick={resetSearch}>
