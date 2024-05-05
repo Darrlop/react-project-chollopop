@@ -9,6 +9,7 @@ function SearchPage({}) {
   const [articles, setArticles] = useState([]);
   const [nameOfSearch, setNameOfSearch] = useState("");
   const [tagsOfSearch, setTagsOfSearch] = useState([]);
+  const navigate = useNavigate();
 
   // const handleSearch = (event) => {
   //   event.preventDefault();
@@ -22,7 +23,10 @@ function SearchPage({}) {
     event.preventDefault();
     getArticles().then((articles) => {
       const filteredArticles = articles.filter((article) =>
-        article.name.includes(nameOfSearch)
+        //Si queremos que el nombre del artículo contenga las palabras de búsqueda:
+        //article.name.includes(nameOfSearch)
+        //Si el artículo empieza por las palabras de búsqueda:
+        article.name.toLowerCase().startsWith(nameOfSearch.toLowerCase())
       );
       console.log("Artículos filtrados:", filteredArticles);
       setArticles(filteredArticles);
@@ -62,9 +66,8 @@ function SearchPage({}) {
     setTagsOfSearch([]);
   };
 
-  // const navigate = useNavigate();
-  // const handleRefresh = () => navigate("/search", { replace: true });
-  const handleRefresh = () => window.location.reload();
+  //Refresco para borrado de resultadosen la página
+  const handleRefresh = () => setArticles([]);
 
   return (
     <>
@@ -107,7 +110,8 @@ function SearchPage({}) {
           </button>
           <button type="submit">Enviar</button>
         </form>
-        <Button onClick={handleRefresh}>Borrar Busqueda</Button>
+        <hr></hr>
+        <Button onClick={handleRefresh}>Borrar Resultados</Button>
 
         <ul style={{ listStyle: "none", padding: 0 }}>
           {articles.map(({ id, name, price, sale, tags, photo }) => (

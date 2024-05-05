@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { getArticle } from "./service";
+import DeleteButton from "./DeleteButton";
 import "./ArticlePage.css";
 
 export default function ArticlePage() {
   const [article, setArticle] = useState({});
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const item = await getArticle(params.articleId);
-      setArticle(item);
+      try {
+        const item = await getArticle(params.articleId);
+        setArticle(item);
+      } catch (error) {
+        alert("Error al obtener el artículo: " + error.message);
+        navigate("/articles", { replace: true });
+      }
     };
     fetchArticle();
-    //getArticle(params.articleId).then((article) => setArticle(article));
   }, []);
 
   return (
@@ -45,6 +51,9 @@ export default function ArticlePage() {
           alt="Imagen del artículo"
         />
       </div>
+      <DeleteButton articleId={params.articleId} />
+      <br></br>
+      <hr></hr>
       <NavLink className="navlink" to={`/articles`}>
         <span className="links">-[ Atrás ]-</span>
       </NavLink>

@@ -11,6 +11,11 @@ export const getArticle = (articleId) => {
   return client.get(url);
 };
 
+export const deleteArticle = (articleId) => {
+  const url = articlesUrl + "/" + articleId;
+  return client.delete(url);
+};
+
 export const postArticle = async (formValues) => {
   //Uso formData debido al envío del file
   const formData = new FormData();
@@ -36,18 +41,5 @@ export const postArticle = async (formValues) => {
     throw error;
   }
 };
-
-// export const postArticle = (formValues) => {
-//   const credentials = {
-//     name: formValues.name,
-//     sale: formValues.sale === "venta" ? true : false,
-//     price: formValues.price,
-//     tags: [formValues.tags],
-//     photo: formValues.photo === undefined ? "" : formValues.photo,
-//   };
-//   console.log(credentials);
-
-//   return client.post(articlesUrl, credentials);
-// };
 
 //("Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmN2FlN2U0Mi00MTQ2LTQ2YmMtODI5Zi0yMGY3OTZkZjk4NmYiLCJpYXQiOjE3MTQ0MTAyODYsImV4cCI6MTc0NTk2Nzg4Nn0.x7WCXysyk_SqOosSHZ60AreN0mMpDmZQW7Q92tiNvzE");

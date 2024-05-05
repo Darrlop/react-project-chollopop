@@ -4,6 +4,8 @@ import "./LoginPage.css";
 import { login } from "./service";
 import { useAuth } from "./context";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useModal } from "../../components/modals/useModal";
+import Modal from "../../components/modals/Modal";
 
 export default function LoginPage({}) {
   // const [userMail, setUserMail] = useState("");
@@ -13,6 +15,7 @@ export default function LoginPage({}) {
   const location = useLocation();
   const navigate = useNavigate();
   const { onLogin } = useAuth();
+  const { isOpen, openModal, closeModal } = useModal(true);
 
   const [formValues, setFormValues] = useState({
     userMail: "",
@@ -35,10 +38,13 @@ export default function LoginPage({}) {
     event.preventDefault();
     console.log(formValues);
     console.log("Hemos logeado");
-    await login(formValues);
-    onLogin();
-    //navigate(location.state?.from || "/articles", { replace: true });
-    navigate("/articles", { replace: true });
+    try {
+      await login(formValues);
+      onLogin();
+      navigate("/articles", { replace: true });
+    } catch (error) {
+      alert("Error al iniciar sesión: " + error.message);
+    }
   };
 
   return (

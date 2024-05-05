@@ -10,7 +10,7 @@ export default function logoutButton() {
   const handleLogoutCLick = async (event) => {
     await logout();
     onLogout();
-    navigate("/");
+    return <useNavigate to="/" />;
   };
 
   return isLogged ? (

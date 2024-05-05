@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "./service";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams, redirect } from "react-router-dom";
 
 import styled from "styled-components";
 import "./ArticlesPage.css";
 
 function ArticlesPage({}) {
   const [articles, setArticles] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getArticles().then((articles) => setArticles(articles));
-    console.log("Acceso a API. Info conseguida");
+    getArticles()
+      .then((articles) => {
+        setArticles(articles);
+        if (articles.length === 0) {
+          navigate("/204");
+        }
+      })
+      .catch((error) => {
+        alert("Error obteniendo lista de artículos: " + error.message);
+        return navigate("/");
+      });
   }, []);
 
   console.log(articles);

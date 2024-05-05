@@ -43,10 +43,14 @@ export default function NewArticlePage({}) {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formValues);
-    await postArticle(formValues);
-    //navigate("/articles", { replace: true });
+    try {
+      event.preventDefault();
+      console.log(formValues);
+      await postArticle(formValues);
+      navigate("/articles", { replace: true });
+    } catch (error) {
+      alert("Error al enviar el artículo: " + error.message);
+    }
   };
 
   return (

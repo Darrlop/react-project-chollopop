@@ -12,12 +12,17 @@ export const login = (formValues) => {
   };
   const checked = formValues.check;
 
-  return client.post("/api/auth/login", credentials).then(({ accessToken }) => {
-    setAuthorizationHeader(accessToken);
-    if (checked) {
-      storage.set("token", accessToken);
-    }
-  });
+  return client
+    .post("/api/auth/login", credentials)
+    .then(({ accessToken }) => {
+      setAuthorizationHeader(accessToken);
+      if (checked) {
+        storage.set("token", accessToken);
+      }
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 };
 
 export const logout = () => {
